@@ -1,1 +1,16 @@
+# compilation artifacts
 module/MOD-INF/classes/
+module/MOD-INF/lib/
+target/
+
+# editor files
+.idea/
+*.log
+logs
+*~
+\#*#
+.*.swp
+*.DS_Store
+*.class
+*.patch
+
