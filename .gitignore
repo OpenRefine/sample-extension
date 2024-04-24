@@ -2,9 +2,13 @@
 module/MOD-INF/classes/
 module/MOD-INF/lib/
 target/
+test-output/
 
 # editor files
 .idea/
+.classpath
+.project
+.settings/
 *.log
 logs
 *~
