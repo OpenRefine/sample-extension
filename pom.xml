@@ -74,7 +74,7 @@
      <dependency>
       <groupId>org.openrefine</groupId>
       <artifactId>main</artifactId>
-      <version>3.7.2</version>
+      <version>3.8.0</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
