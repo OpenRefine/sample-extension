@@ -17,4 +17,4 @@ logs
 *.DS_Store
 *.class
 *.patch
-
+.vscode/
