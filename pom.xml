@@ -12,7 +12,7 @@
   <url>http://openrefine.org/</url>
 
   <properties>
-    <openrefine.version>3.8.1</openrefine.version>
+    <openrefine.version>3.8.2</openrefine.version>
   </properties>
 
   <build>
