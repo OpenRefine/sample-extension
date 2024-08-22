@@ -18,10 +18,6 @@
   <description>${extension.name} provided for demonstration purposes</description>
   <url>http://openrefine.org/</url>
 
-  <properties>
-    <openrefine.version>3.8.2</openrefine.version>
-  </properties>
-
   <build>
     <plugins>
       <plugin>
