@@ -14,6 +14,7 @@ public class SampleUtilTest extends RefineTest {
     @Test
     public void testStringArrayLength() {
         // you can use the same sort of test utilities as in OpenRefine's own test suite
+        // The project created below is unused here, but shows you how you could create one for your tests.
         Project project = createProject(new String[] { "first column", "second column" },
                 new Serializable[][] {
                   { "a", "b" },
