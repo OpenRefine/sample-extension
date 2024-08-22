@@ -18,6 +18,10 @@
   <description>${extension.name} provided for demonstration purposes</description>
   <url>http://openrefine.org/</url>
 
+  <properties>
+    <openrefine.version>3.8.2</openrefine.version>
+  </properties>
+
   <build>
     <plugins>
       <plugin>
@@ -34,7 +38,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>3.4.1</version>
+        <version>3.4.2</version>
         <executions>
           <execution>
             <id>default-jar</id>
@@ -53,7 +57,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
-        <version>3.6.1</version>
+        <version>3.8.0</version>
         <executions>
             <execution>
             <phase>compile</phase>
@@ -91,7 +95,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.2.5</version>
+        <version>3.4.0</version>
       </plugin>
     </plugins>
   </build>
