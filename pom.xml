@@ -2,18 +2,21 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <properties>
+    <openrefine.version>3.8.1</openrefine.version>
+    <!-- Change the values below, as well as the groupId & url, to reflect your extension -->
+    <extension.id>openrefine-sample-extension</extension.id>
+    <extension.name>OpenRefine Sample Extension</extension.name>
+  </properties>
+
   <groupId>org.openrefine</groupId>
-  <artifactId>sample</artifactId>
+  <artifactId>${extension.id}</artifactId>
   <packaging>jar</packaging>
   <version>0.1.0</version>
 
-  <name>OpenRefine - Sample extension</name>
-  <description>Example extension provided for demonstration purposes</description>
+  <name>${extension.name}</name>
+  <description>${extension.name} provided for demonstration purposes</description>
   <url>http://openrefine.org/</url>
-
-  <properties>
-    <openrefine.version>3.8.1</openrefine.version>
-  </properties>
 
   <build>
     <plugins>
