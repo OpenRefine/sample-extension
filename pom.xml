@@ -70,7 +70,7 @@
       <!-- package the extension as a zip file -->
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
-        <version>3.0.0</version>
+        <version>3.7.1</version>
         <configuration>
           <appendAssemblyId>false</appendAssemblyId>	
           <descriptors>
