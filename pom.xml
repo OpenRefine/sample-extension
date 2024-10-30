@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <properties>
-    <openrefine.version>3.8.2</openrefine.version>
+    <openrefine.version>3.8.5</openrefine.version>
     <!-- Change the values below, as well as the groupId & url, to reflect your extension -->
     <extension.id>openrefine-sample-extension</extension.id>
     <extension.name>OpenRefine Sample Extension</extension.name>
