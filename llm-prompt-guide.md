@@ -1,46 +1,83 @@
-# 📌 Chat Completion Prompt Guide
+# AI Column Extraction Feature
+Documentation for AI-powered text extraction and transformation functionality
 
-## 🔹 General Structure
-A well-structured prompt improves the quality of responses from an LLM.
+## Overview
+The AI Column Extraction feature allows users to create new columns by processing existing text data using AI language models. Users can extract specific information, transform content, or generate new insights based on source text.
 
+## Configuration
 
-## 🔹 Key Components
+### Basic Settings
+1. New Column Name: Define the name for the column that will store the AI-generated results
+2. LLM Provider: Select the configured AI provider with pre-defined parameters - Model, Server URL, Temperature, Max Tokens
+3. Response Format: Choose the output structure
 
-| Field        | Description |
+| Response format  | Description |
 |-------------|------------|
-| `model` | The LLM model to use (e.g., `gpt-4`, `mistralai/Mistral-7B-Instruct`). |
-| `messages` | The conversation history, structured as an array of `{ role, content }` objects. |
-| `temperature` | Controls randomness (lower = more deterministic). |
-| `max_tokens` | Limits the number of tokens in the response. |
+ | `Text |  Plain text response | 
+ | `JSON Schema |  Structured response following a defined schema | 
+ | `JSON Object |  Free-form JSON response | 
 
----
+### Input Configuration
 
-## 🔹 Roles in Messages
-1. **System (`"role": "system"`)**  
-   - Defines behavior and context of the assistant.  
-   - Example:  
+1. Description: Detailed instructions for the AI model about the desired extraction or transformation
+2. JSON Schema (Optional): Required when Response Format is set to JSON Schema. Defines the structure and validation rules for the output
 
-2. **User (`"role": "user"`)**  
-- Represents the input from the user.  
-- Example:  
+#### JSON Schema generator tools
+1. [Liquid Technologies]{https://www.liquid-technologies.com/online-json-to-schema-converter}
+2. [http://www.jsonschema.net]{http://www.jsonschema.net}
+3. [https://easy-json-schema.github.io]{https://easy-json-schema.github.io}
 
-3. **Assistant (`"role": "assistant"`)**  
-- Optionally stores previous responses for better continuity.  
-- Example:  
+Note: There are few manual edits that may be required. Refer to the JSON schema in the example below.
 
-{
-  "model": "gpt-4",
-  "messages": [
-    { "role": "system", "content": "You are an AI acting as a medieval knight." },
-    { "role": "user", "content": "How would you prepare for battle?" }
-  ]
-}
+### Preview Function
+
+Shows sample processing using the first row of data
+Displays:
+1. Input Value: Original text from source column
+2. Response: AI-generated result based on configuration
+
+Allows validation before processing entire dataset
+
+## Examples
+
+### Text Response Examples
+| Use Case | Instruction |
+|-------------|------------|
+| Basic Summary | Generate a one-sentence summary of the input text |
+| Language Translation | Translate the text to German |
+
+### JSON Schema Examples
+| Use Case | Instruction | JSON Schema |
+|-------------|------------|------------|
+| Person information extraction | Extract in JSON format details of the person mentioned in the content | ``` { "name": "individual_schema", "schema": { "type": "object", "properties": { "name": { "type": "string", "description": "The name of the individual." }, "dateofbirth": { "type": "string", "description": "The date of birth of the individual." }, "placeofbirth": { "type": "string", "description": "The place where the individual was born." }, "dateofdeath": { "type": "string", "description": "The date of death of the individual." }, "placeofdeath": { "type": "string", "description": "The place where the individual died." } }, "required": [ "name", "dateofbirth", "placeofbirth", "dateofdeath", "placeofdeath" ], "additionalProperties": false }, "strict": true }``` |
+
+### JSON object examples
+
+| Use Case | Instruction |
+|-------------|------------|
+| Content classification | Classify the content and extract key entities, the response should be in JSON format |
+
+## Use Cases
+
+### Content Transformation
+
+1. Summarization
+2. Translation
+3. Style conversion
+4. Format standardization
 
 
-🔹 Parameter Tuning Recommendations
-Parameter	Effect
-temperature	0.0 - 1.0 → Lower values (0.2) = more predictable, higher values (0.9) = more creative.
-top_p	0.0 - 1.0 → Alternative to temperature, filters responses probabilistically.
-max_tokens	Limits response length. Higher values return longer responses.
-frequency_penalty	Reduces repetition in responses (-2.0 to 2.0).
-presence_penalty	Encourages new topics (-2.0 to 2.0).
+### Information Extraction
+
+1. Entity recognition
+2. Key fact extraction
+3. Timeline creation
+4. Relationship mapping
+
+
+### Content Analysis
+
+1. Sentiment analysis
+2. Theme identification
+3. Category classification
+4. Key concept extraction
