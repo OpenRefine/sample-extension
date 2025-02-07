@@ -1,0 +1,29 @@
+<div class="dialog-frame llm-dialog" style="width: 700px">
+    <div class="dialog-header" bind="llmSettingsContainer"></div>
+    <div class="dialog-body" bind="dialogBody">
+        <p bind="explainLLMSetup"></p>
+        <div class="llm-list-wrapper">
+            <table class="llm-providers-table" >
+                <thead>
+                <tr>
+                    <th bind="llmLabel">Name</th>
+                    <th bind="llmModel">Model</th>
+                    <th bind="llmApiUrl">API URL</th>
+                    <th bind="llmActions">Actions</th>
+                </tr>
+                </thead>
+                <tbody bind="listLLMProviders">
+                <!-- dynamically generated -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="dialog-footer" style="justify-content: space-between" bind="dialogFooter">
+        <div class="dialog-footer-bg">
+            <button class="button" bind="addButton"></button>
+        </div>
+        <div class="dialog-footer-bg">
+            <button class="button button-primary" bind="closeButton"></button>
+        </div>
+    </div>
+</div>

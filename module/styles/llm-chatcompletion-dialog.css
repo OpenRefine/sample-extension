@@ -1,0 +1,72 @@
+div.input-container-llm>input, div.input-container-llm>textarea {
+  display: inline-block;
+  width: 100%;
+  height: 75px;
+  resize: none;
+  padding: 2px;
+  border: 1px inset;
+  margin-left: -3px;
+  margin-top: -3px;
+  vertical-align: top;
+}
+
+.hint-label {
+    margin-top: 3px;
+    display: flex;
+    text-wrap:auto;
+    font-size: 10px;
+    font-style: italic;
+}
+
+.preview-panel {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.preview-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 700px;
+    max-width: 100%;
+}
+
+.preview-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.preview-label {
+    font-size: 14px;
+    font-weight: normal;
+    margin-bottom: 5px;
+}
+
+.preview-label-bold {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.preview-textarea {
+    height: 190px;
+    resize: none;
+    overflow: auto;
+    padding: 5px;
+    font-family: monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.preview-footer {
+    font-size: 1em;
+    display: flex;
+    column-gap: 5px;
+    justify-content: right;
+    padding: var(--padding-tight);
+  }

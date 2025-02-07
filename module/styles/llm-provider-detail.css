@@ -1,0 +1,28 @@
+.add-llm-dialog p {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+}
+
+.form-item {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 3px;
+  cursor: default;
+}
+
+input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}

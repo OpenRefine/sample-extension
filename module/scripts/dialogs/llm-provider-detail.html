@@ -1,0 +1,36 @@
+<div class="dialog-frame add-llm-dialog" style="width: 435px;">
+  <div class="dialog-header" bind="dialogHeader"></div>
+  <div class="dialog-body" bind="dialogBody">
+    <div class="form-container">
+      <div class="form-item">
+        <label bind="llmLabel"></label>
+        <input type="text" bind="llmLabelInput" required />
+      </div>
+      <div class="form-item">
+        <label bind="llmServerUrl"></label>
+        <input type="text" bind="llmServerUrlInput" required />
+      </div>
+      <div class="form-item">
+        <label bind="llmModel"></label>
+        <input type="text" bind="llmModelInput" required />
+      </div>
+      <div class="form-item">
+        <label bind="llmApiKey"></label>
+        <input type="text" bind="llmApiKeyInput" required />
+      </div>
+      <div class="form-item">
+        <label bind="llmTemperature"></label>
+        <input type="number" bind="llmTemperatureInput" required value="1" min="0.0" max="2.0" step="0.1"/>
+      </div>
+      <div class="form-item">
+        <label bind="llmMaxTokens"></label>
+        <input type="number" bind="llmMaxTokensInput" required />
+      </div>
+    </div>
+  </div>
+  <div class="dialog-footer" bind="dialogFooter">
+    <button class="button" bind="testButton"></button>
+    <button class="button" bind="cancelButton"></button>
+    <button class="button" bind="saveButton"></button>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+.llm-dialog p {
+  padding: 0 10px 10px 10px
+}
+
+.llm-list-wrapper {
+  max-height: 500px;
+  overflow-y: auto
+}
+
+.llm-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+}
+
+.llm-list li {
+  display: flex;
+  flex-direction: row;
+  flex-basis: fit-content;
+  align-items: center;
+  cursor: pointer;
+  padding: 5px;
+  margin: 5px;
+}
+
+.llm-list li.selected {
+  background: #bcf;
+  font-weight: bold;
+}
+
+.llm-list li:not(.selected):hover {
+  background: var(--dialog-footer);
+}
+
+.llm-list li img {
+  flex: 0 0;
+  max-height: 60px;
+  max-width: 60px;
+}
+
+.llm-list .llm-info {
+  display: flex;
+  flex: 1 1;
+  flex-direction: row;
+  padding: 5px;
+}
+
+.llm-list li.selected .llm-name {
+  font-weight: bold;
+}
+
+.llm-list .llm-name {
+  padding: 3px;
+}
+
+.llm-list .llm-url {
+  padding-left: 5px;
+  flex: auto;
+  color: var(--light-grey);
+}
+
+.llm-list li a, .llm-list li span {
+  margin: 10px;
+  flex: 0 0;
+}
+
+.llm-list li.selected a, .llm-list li.active a {
+  display: none;
+}
+
+.llm-list li.active span {
+  display: block !important;
+}
+
+.llm-providers-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.llm-providers-table th, .llm-providers-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.llm-providers-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}

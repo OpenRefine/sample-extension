@@ -5,17 +5,17 @@
   <properties>
     <openrefine.version>3.8.7</openrefine.version>
     <!-- Change the values below, as well as the groupId & url, to reflect your extension -->
-    <extension.id>openrefine-sample-extension</extension.id>
-    <extension.name>OpenRefine Sample Extension</extension.name>
+    <extension.id>openrefine-llm-extension</extension.id>
+    <extension.name>OpenRefine LLM Extension</extension.name>
   </properties>
 
   <groupId>org.openrefine</groupId>
-  <artifactId>${extension.id}</artifactId>
+  <artifactId>openrefine-llm-extension</artifactId>
   <packaging>jar</packaging>
   <version>0.1.0</version>
 
   <name>${extension.name}</name>
-  <description>${extension.name} provided for demonstration purposes</description>
+  <description>${extension.name} enables data wrangling using LLM</description>
   <url>http://openrefine.org/</url>
 
   <build>
@@ -55,16 +55,16 @@
         <artifactId>maven-dependency-plugin</artifactId>
         <version>3.8.1</version>
         <executions>
-            <execution>
+          <execution>
             <phase>compile</phase>
             <goals>
-                <goal>copy-dependencies</goal>
+              <goal>copy-dependencies</goal>
             </goals>
             <configuration>
-                <outputDirectory>module/MOD-INF/lib</outputDirectory>
-                <includeScope>runtime</includeScope>
+              <outputDirectory>module/MOD-INF/lib</outputDirectory>
+              <includeScope>runtime</includeScope>
             </configuration>
-            </execution>
+          </execution>
         </executions>
       </plugin>
       <!-- package the extension as a zip file -->
@@ -72,7 +72,7 @@
         <artifactId>maven-assembly-plugin</artifactId>
         <version>3.7.1</version>
         <configuration>
-          <appendAssemblyId>false</appendAssemblyId>	
+          <appendAssemblyId>false</appendAssemblyId>
           <descriptors>
             <descriptor>src/assembly/extension.xml</descriptor>
           </descriptors>
@@ -94,6 +94,12 @@
         <version>3.5.2</version>
       </plugin>
     </plugins>
+    <testSourceDirectory>src/test/java/</testSourceDirectory>
+    <testResources>
+      <testResource>
+        <directory>src/test/data</directory>
+      </testResource>
+    </testResources>
   </build>
 
   <dependencies>
@@ -124,6 +130,11 @@
       <version>${openrefine.version}</version>
       <type>test-jar</type>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jasypt</groupId>
+      <artifactId>jasypt</artifactId>
+      <version>1.9.3</version>
     </dependency>
   </dependencies>
 </project>
