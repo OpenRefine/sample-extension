@@ -83,7 +83,7 @@ LLMChatCompletionDialog.prototype.launch = function (column) {
           window.alert($.i18n('llm-chatconpletion/preview-missing-schema'));
           return;
         }
-        console.log(" -- 1 -- " + selectedLLM + " - " + selectedresponseFormat + " - " + systemContent + " - " + jsonSchema );
+
         event.preventDefault();
         var columnName = jQueryTrim(elmts.columnNameInput[0].value);
         if (!columnName.length) {
@@ -91,7 +91,6 @@ LLMChatCompletionDialog.prototype.launch = function (column) {
           return;
         }
 
-        console.log(" --2 -- " + column.name + " -- " + columnName + " -- " + columnIndex);
         let delay = 1;
 
         Refine.postProcess(

@@ -8,6 +8,7 @@ import org.openrefine.extensions.llmExtension.model.ChatCompletionRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.net.*;
 import java.net.http.HttpClient;
@@ -90,10 +91,20 @@ public class ChatCompletionService {
                 logger.error("ChatCompletionService request failure - {} {}", responseCode, response.body());
                 responseMessage = MessageFormat.format("LLM request failed. Status Code : {0,number,integer}. Message : {1}", responseCode, response.body());
             }
-        } catch (Exception e) {
-            logger.error("ChatCompletionService error - {}", e.getMessage());
-            responseMessage = MessageFormat.format("LLM request failed. Message : {0}", e.getMessage());
+        } catch (InterruptedException e) {
+            logger.error("ChatCompletionService error InterruptedException - {}", e.getMessage());
+            responseMessage = MessageFormat.format("LLM request failed. Message : InterruptedException {0}", e.getMessage());
+        } catch (SecurityException e) {
+            logger.error("ChatCompletionService error SecurityException - {}", e.getMessage());
+            responseMessage = MessageFormat.format("LLM request failed. Message : SecurityException {0}", e.getMessage());
+        } catch (IllegalArgumentException e) {
+            logger.error("ChatCompletionService error IllegalArgumentException - {}", e.getMessage());
+            responseMessage = MessageFormat.format("LLM request failed. Message : IllegalArgumentException {0}", e.getMessage());
+        } catch (Exception e ) {
+            logger.error("ChatCompletionService error Exception - {}", e.getMessage());
+            responseMessage = MessageFormat.format("LLM request failed. Message : Exception {0}", e.getMessage());
         }
+
         throw new Exception(responseMessage);
     }
 
