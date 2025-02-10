@@ -62,7 +62,9 @@ public class ChatCompletionService {
                     _responseFormat,
                     messages,
                     llmConfig.getMaxTokens(),
-                    llmConfig.getTemperature()
+                    llmConfig.getTemperature(),
+                    llmConfig.getTopP(),
+                    llmConfig.getSeed()
             );
 
             String payload = objectMapper.writeValueAsString(payloadObject);

@@ -12,13 +12,17 @@ public class ChatCompletionRequest {
     private ResponseFormat response_format;
     private int max_tokens;
     private double temperature;
+    private Double top_p;
+    private Integer seed;
 
-    public ChatCompletionRequest(String model, ResponseFormat responseFormat, List<Message> messages, int maxTokens, double temperature) {
+    public ChatCompletionRequest(String model, ResponseFormat responseFormat, List<Message> messages, int maxTokens, double temperature, Double top_p, Integer seed) {
         this.model = model;
         this.response_format = responseFormat;
         this.messages = messages;
         this.max_tokens = maxTokens;
         this.temperature = temperature;
+        this.top_p = top_p;
+        this.seed = seed;
     }
 
 
@@ -132,5 +136,13 @@ public class ChatCompletionRequest {
 
     public void setResponse_format(ResponseFormat response_format) {
         this.response_format = response_format;
+    }
+
+    public Double getTop_p() {
+        return top_p;
+    }
+
+    public Integer getSeed() {
+        return seed;
     }
 }

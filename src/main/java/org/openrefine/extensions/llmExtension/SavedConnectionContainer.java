@@ -29,8 +29,11 @@
 
 package org.openrefine.extensions.llmExtension;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SavedConnectionContainer {
 
     private List<LLMConfiguration> savedConnections;

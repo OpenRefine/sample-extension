@@ -1,5 +1,8 @@
 package org.openrefine.extensions.llmExtension;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class LLMConfiguration {
     private String label;
     private String apiURL;
@@ -7,14 +10,18 @@ public class LLMConfiguration {
     private double temperature;
     private int maxTokens;
     private String apiKey;
+    private Double topP;
+    private Integer seed;
 
-    public LLMConfiguration(String label, String apiURL, String modelName, double temperature, int maxTokens, String apiKey) {
+    public LLMConfiguration(String label, String apiURL, String modelName, double temperature, int maxTokens, String apiKey, Double topP, Integer seed) {
         this.label = label;
         this.apiURL = apiURL;
         this.modelName = modelName;
         this.temperature = temperature;
         this.maxTokens = maxTokens;
         this.apiKey = apiKey;
+        this.topP = topP;
+        this.seed = seed;
     }
 
     public LLMConfiguration() {
@@ -45,6 +52,14 @@ public class LLMConfiguration {
         return apiKey;
     }
 
+    public Double getTopP() {
+        return topP;
+    }
+
+    public Integer getSeed() {
+        return seed;
+    }
+
     public void setLabel(String label) {
         this.label = label;
     }
@@ -69,6 +84,14 @@ public class LLMConfiguration {
         this.apiKey = apiKey;
     }
 
+    public void setTopP(Double topP) {
+        this.topP = topP;
+    }
+
+    public void setSeed(Integer seed) {
+        this.seed = seed;
+    }
+
     @Override
     public String toString() {
         return "LLMConfiguration{" +
@@ -78,6 +101,8 @@ public class LLMConfiguration {
                 ", temperature=" + temperature +
                 ", maxTokens=" + maxTokens +
                 ", apiKey='" + apiKey + '\'' +
+                ", topP='" + topP + '\'' +
+                ", seed='" + seed + '\'' +
                 '}';
     }
 }

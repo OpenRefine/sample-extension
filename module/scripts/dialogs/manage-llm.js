@@ -89,7 +89,10 @@ ManageLLMSettingsUI.prototype.addLLMProvider = function (mode, _llmProviderDetai
     elmts.llmApiKey.text($.i18n("llm-detail/apikey"));
     elmts.llmTemperature.text($.i18n("llm-detail/temperature"));
     elmts.llmMaxTokens.text($.i18n("llm-detail/maxTokens"));
+    elmts.llmTopP.text($.i18n("llm-detail/topP"));
+    elmts.llmSeed.text($.i18n("llm-detail/seed"));
 
+    elmts.llmPromptHelp.text($.i18n("llm-chatcompletion/prompt-help"));
     elmts.testButton.text($.i18n("llm-detail/test"));
     elmts.cancelButton.text($.i18n("llm-detail/cancel"));
     elmts.saveButton.text($.i18n("llm-detail/save"));
@@ -102,6 +105,8 @@ ManageLLMSettingsUI.prototype.addLLMProvider = function (mode, _llmProviderDetai
       elmts.llmApiKeyInput[0].value = _llmProviderDetail.apiKey;
       elmts.llmTemperatureInput[0].value = _llmProviderDetail.temperature;
       elmts.llmMaxTokensInput[0].value = _llmProviderDetail.maxTokens;
+      elmts.llmTopPInput[0].value = _llmProviderDetail.topP;
+      elmts.llmSeedInput[0].value = _llmProviderDetail.seed;
     }
     let level = DialogSystem.showDialog(frame);
 
@@ -117,6 +122,8 @@ ManageLLMSettingsUI.prototype.addLLMProvider = function (mode, _llmProviderDetai
           llmProviderInfo.apiKey = jQueryTrim(elmts.llmApiKeyInput.val());
           llmProviderInfo.temperature = elmts.llmTemperatureInput.val();
           llmProviderInfo.maxTokens = elmts.llmMaxTokensInput.val();
+          llmProviderInfo.topP = elmts.llmTopPInput.val();
+          llmProviderInfo.seed = elmts.llmSeedInput.val();
           if ( mode === 'update') {
             llmProviderInfo.updateKey = _llmProviderDetail.label;
           }
@@ -143,6 +150,8 @@ ManageLLMSettingsUI.prototype.addLLMProvider = function (mode, _llmProviderDetai
           llmProviderInfo.apiKey = jQueryTrim(elmts.llmApiKeyInput.val());
           llmProviderInfo.temperature = elmts.llmTemperatureInput.val();
           llmProviderInfo.maxTokens = elmts.llmMaxTokensInput.val();
+          llmProviderInfo.topP = elmts.llmTopPInput.val();
+          llmProviderInfo.seed = elmts.llmSeedInput.val();
           llmProviderInfo.subCommand = "test";
 
           var errorMessage = ManageLLMSettingsUI.validateLLMProvider(llmProviderInfo);

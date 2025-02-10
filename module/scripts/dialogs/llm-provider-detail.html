@@ -23,12 +23,21 @@
         <input type="number" bind="llmTemperatureInput" required value="1" min="0.0" max="2.0" step="0.1"/>
       </div>
       <div class="form-item">
+        <label bind="llmTopP"></label>
+        <input type="number" bind="llmTopPInput" required value="0.9" min="0.1" max="1.0" step="0.1"/>
+      </div>
+      <div class="form-item">
+        <label bind="llmSeed"></label>
+        <input type="number" bind="llmSeedInput"/>
+      </div>
+      <div class="form-item">
         <label bind="llmMaxTokens"></label>
         <input type="number" bind="llmMaxTokensInput" required />
       </div>
     </div>
   </div>
   <div class="dialog-footer" bind="dialogFooter">
+    <a class="button" bind="llmPromptHelp" href="https://github.com/sunilnatraj/llm-extension/blob/master/llm-provider-guide.md" target="_blank"></a>
     <button class="button" bind="testButton"></button>
     <button class="button" bind="cancelButton"></button>
     <button class="button" bind="saveButton"></button>

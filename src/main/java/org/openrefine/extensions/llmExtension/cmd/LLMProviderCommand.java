@@ -63,9 +63,14 @@ public class LLMProviderCommand extends Command {
         llmConfiguration.setApiURL(request.getParameter("apiURL"));
         llmConfiguration.setModelName(request.getParameter("modelName"));
         llmConfiguration.setApiKey(request.getParameter("apiKey"));
-        llmConfiguration.setTemperature(Integer.parseInt(request.getParameter("temperature")));
+        llmConfiguration.setTemperature(Double.parseDouble(request.getParameter("temperature")));
         llmConfiguration.setMaxTokens(Integer.parseInt(request.getParameter("maxTokens")));
-
+        if (! request.getParameter("topP").isEmpty()) {
+            llmConfiguration.setTopP(Double.parseDouble(request.getParameter("topP")));
+        }
+        if (! request.getParameter("seed").isEmpty()) {
+            llmConfiguration.setSeed(Integer.parseInt(request.getParameter("seed")));
+        }
         return llmConfiguration;
     }
 

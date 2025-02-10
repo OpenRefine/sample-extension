@@ -3,7 +3,9 @@ package org.openrefine.extensions.llmExtension;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectReader;
 import com.google.refine.ProjectManager;
 import com.google.refine.io.FileProjectManager;
 import org.slf4j.Logger;
@@ -22,17 +24,15 @@ public class LLMUtils {
     public final static String SAVED_CONNECTION_KEY = "savedConnections";
 
     private static SimpleTextEncryptor textEncryptor = new SimpleTextEncryptor("Aa1Gb@tY7_Y");
+    private static ObjectMapper _mapper = new ObjectMapper();
 
     public static void addLLMProvider(LLMConfiguration llmConfig) {
 
         try {
-            ObjectMapper mapper = new ObjectMapper();
             String savedConnectionFile = getExtensionFilePath();
-            SavedConnectionContainer savedConnectionContainer = mapper.readValue(new File(savedConnectionFile),
-                    SavedConnectionContainer.class);
+            SavedConnectionContainer savedConnectionContainer = getSavedConnections(savedConnectionFile);
             savedConnectionContainer.getSavedConnections().add(llmConfig);
-
-            mapper.writerWithDefaultPrettyPrinter().writeValue(new File(savedConnectionFile), savedConnectionContainer);
+            _mapper.writerWithDefaultPrettyPrinter().writeValue(new File(savedConnectionFile), savedConnectionContainer);
 
         } catch (JsonGenerationException e1) {
             logger.error("JsonGenerationException: {}", e1);
@@ -51,8 +51,7 @@ public class LLMUtils {
         try {
             ObjectMapper mapper = new ObjectMapper();
             String savedConnectionFile = getExtensionFilePath();
-            SavedConnectionContainer savedConnectionContainer = mapper.readValue(new File(savedConnectionFile),
-                    SavedConnectionContainer.class);
+            SavedConnectionContainer savedConnectionContainer = getSavedConnections(savedConnectionFile);
             savedConnectionContainer.getSavedConnections()
                     .removeIf(config -> updateKey.equals(config.getLabel()));
             savedConnectionContainer.getSavedConnections().add(llmConfig);
@@ -113,7 +112,8 @@ public class LLMUtils {
                     return sc.getSavedConnections();
                 }
             }
-            SavedConnectionContainer savedConnectionContainer = mapper.readValue(new File(filename), SavedConnectionContainer.class);
+            // SavedConnectionContainer savedConnectionContainer = mapper.readValue(new File(filename), SavedConnectionContainer.class);
+            SavedConnectionContainer savedConnectionContainer = getSavedConnections(filename);
             return savedConnectionContainer.getSavedConnections();
         } catch (JsonParseException e) {
             logger.error("JsonParseException: {}", e);
@@ -130,8 +130,7 @@ public class LLMUtils {
         try {
             ObjectMapper mapper = new ObjectMapper();
             String savedConnectionFile = getExtensionFilePath();
-            SavedConnectionContainer savedConnectionContainer = mapper.readValue(new File(savedConnectionFile),
-                    SavedConnectionContainer.class);
+            SavedConnectionContainer savedConnectionContainer = getSavedConnections(savedConnectionFile);
             matchingConfig = savedConnectionContainer.getSavedConnections()
                     .stream()
                     .filter(config -> label.equals(config.getLabel()))
@@ -161,5 +160,15 @@ public class LLMUtils {
         String fileSep = System.getProperty("file.separator");
         String filename = dir.getPath() + fileSep + LLM_EXTENSION_DIR;
         return filename;
+    }
+
+    private static SavedConnectionContainer getSavedConnections(String filename) throws IOException {
+        SavedConnectionContainer savedConnectionContainer = new SavedConnectionContainer();
+        // Read JSON as tree (avoiding direct deserialization)
+        JsonNode jsonNode = _mapper.readTree(new File(filename));
+        // Merge JSON into the default instance (only existing fields will be updated)
+        ObjectReader reader = _mapper.readerForUpdating(savedConnectionContainer);
+        reader.readValue(jsonNode);
+        return savedConnectionContainer;
     }
 }
