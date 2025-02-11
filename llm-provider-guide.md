@@ -46,3 +46,12 @@ This guide explains how to configure an LLM Provider by specifying key details s
 | Storytelling / Creative Writing	| 1.2	| 0.9| 
 | Code Generation / Logical Responses	| 0.2	| 0.9| 
 | Poetry / Idea Brainstorming	| 1.5	| 0.95| 
+
+## Seed
+
+A seed is a fixed starting point for a random number generator. Since language models use random sampling during token selection, setting a seed ensures that you get the same output every time.
+
+### How Does It Work?
+1. Without a fixed seed: The model will generate different responses each time you run it (even with the same prompt).
+2. With a fixed seed (seed = 42, for example): The model will follow the same random path and give the same response every time.
+
