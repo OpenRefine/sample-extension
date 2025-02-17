@@ -69,7 +69,20 @@ public class LLMConnectCommand extends Command {
     }
 
     protected LLMConfiguration getLLMConfiguration(HttpServletRequest request) {
-        String providerLabel = request.getParameter("providerLabel");
-        return LLMUtils.getLLMProvider(providerLabel);
+        if ( "test".equals(request.getParameter("subCommand")) ) {
+            LLMConfiguration llmConfiguration = new LLMConfiguration();
+            llmConfiguration.setLabel(request.getParameter("label"));
+            llmConfiguration.setApiURL(request.getParameter("apiURL"));
+            llmConfiguration.setModelName(request.getParameter("modelName"));
+            llmConfiguration.setApiKey(request.getParameter("apiKey"));
+            llmConfiguration.setTemperature(Double.parseDouble(request.getParameter("temperature")));
+            llmConfiguration.setMaxTokens(Integer.parseInt(request.getParameter("maxTokens")));
+            llmConfiguration.setTopP(Double.parseDouble(request.getParameter("topP")));
+            llmConfiguration.setSeed(Integer.parseInt(request.getParameter("seed")));
+            return llmConfiguration;
+        } else {
+            String providerLabel = request.getParameter("providerLabel");
+            return LLMUtils.getLLMProvider(providerLabel);
+        }
     }
 }

@@ -143,26 +143,25 @@ ManageLLMSettingsUI.prototype.addLLMProvider = function (mode, _llmProviderDetai
 
     elmts.testButton.on('click', async function () {
 
-          var llmProviderInfo = {};
-          llmProviderInfo.label = jQueryTrim(elmts.llmLabelInput.val());
-          llmProviderInfo.apiURL = jQueryTrim(elmts.llmServerUrlInput.val());
-          llmProviderInfo.modelName = jQueryTrim(elmts.llmModelInput.val());
-          llmProviderInfo.apiKey = jQueryTrim(elmts.llmApiKeyInput.val());
-          llmProviderInfo.temperature = elmts.llmTemperatureInput.val();
-          llmProviderInfo.maxTokens = elmts.llmMaxTokensInput.val();
-          llmProviderInfo.topP = elmts.llmTopPInput.val();
-          llmProviderInfo.seed = elmts.llmSeedInput.val();
-          llmProviderInfo.subCommand = "test";
+          var requestPayload = {};
+          requestPayload.label = jQueryTrim(elmts.llmLabelInput.val());
+          requestPayload.providerLabel = jQueryTrim(elmts.llmLabelInput.val());
+          requestPayload.apiURL = jQueryTrim(elmts.llmServerUrlInput.val());
+          requestPayload.modelName = jQueryTrim(elmts.llmModelInput.val());
+          requestPayload.apiKey = jQueryTrim(elmts.llmApiKeyInput.val());
+          requestPayload.temperature = elmts.llmTemperatureInput.val();
+          requestPayload.maxTokens = elmts.llmMaxTokensInput.val();
+          requestPayload.topP = elmts.llmTopPInput.val();
+          requestPayload.seed = elmts.llmSeedInput.val();
+          requestPayload.subCommand = "test";
 
-          var errorMessage = ManageLLMSettingsUI.validateLLMProvider(llmProviderInfo);
+          var errorMessage = ManageLLMSettingsUI.validateLLMProvider(requestPayload);
           if ( errorMessage.length > 0 ) {
             alert(errorMessage);
             return;
           }
-          var requestPayload = {}
-          requestPayload.providerLabel = jQueryTrim(elmts.llmLabelInput.val());
-          requestPayload.subCommand = "test";
 
+          requestPayload.subCommand = "test";
           var dismissBusy = DialogSystem.showBusy($.i18n('llm-extension/processing'));
           var response = "";
           try {

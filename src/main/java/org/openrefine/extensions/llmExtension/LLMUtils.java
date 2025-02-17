@@ -114,6 +114,7 @@ public class LLMUtils {
             }
             // SavedConnectionContainer savedConnectionContainer = mapper.readValue(new File(filename), SavedConnectionContainer.class);
             SavedConnectionContainer savedConnectionContainer = getSavedConnections(filename);
+            savedConnectionContainer.getSavedConnections().sort((o1, o2) -> o1.getLabel().compareTo(o2.getLabel()));
             return savedConnectionContainer.getSavedConnections();
         } catch (JsonParseException e) {
             logger.error("JsonParseException: {}", e);
