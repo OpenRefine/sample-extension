@@ -2,7 +2,7 @@
   "llm-extension/manage-llm": "Manage LLM Providers",
   "llm-extension/menu-label": "AI",
   "llm-management/llm-list-header": "LLM providers",
-  "llm-management/llm-help": "LLM service that supports openai chat completion model can be defined and used in any project.",
+  "llm-management/llm-help": "This extension supports the openai chat completion model and can be defined and used in any project.",
   "llm-management/close":"Close",
   "llm-management/add-llm": "Add LLM Provider",
   "llm-detail/dialog-header": "LLM Provider",
