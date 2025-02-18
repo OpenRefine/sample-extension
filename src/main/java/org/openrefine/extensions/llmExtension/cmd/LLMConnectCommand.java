@@ -4,7 +4,7 @@ import com.google.refine.commands.Command;
 import com.google.refine.commands.HttpUtilities;
 import org.openrefine.extensions.llmExtension.LLMConfiguration;
 import org.openrefine.extensions.llmExtension.LLMUtils;
-import org.openrefine.extensions.llmExtension.serrvice.ChatCompletionService;
+import org.openrefine.extensions.llmExtension.service.ChatCompletionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
