@@ -18,12 +18,11 @@
             </table>
         </div>
         <div class="llm-about">
-            <p>You'll need to use the format:</p>
-                <ul>
-                    <li><code>https://api.openai.com/v1/chat/completions/</code> [Remote OpenAI endpoints]</li>
-                    <li>or <code>http://localhost:11434/v1/chat/completions/</code> [Local OpenAI endpoints, e.g. Ollama]</li>
-                </ul> 
-            <p>Note: This extension is still in development and not all OpenAI API endpoints may work yet (e.g. LMStudio). For more information on how to best tweak prompts and parameters to get the most out of `llm-extension`, read more about parameters at the <a href="https://github.com/sunilnatraj/llm-extension" target="_blank">llm-extension repository on Github</a>.</p>
+            <p bind="infoLLMManagement"></p>
+            <ul>
+                <li><a bind="llmProviderGuide" href="https://github.com/sunilnatraj/llm-extension/blob/master/llm-provider-guide.md" target="_blank"></a></li>
+                <li><a bind="llmFeatureGuide" href="https://github.com/sunilnatraj/llm-extension/blob/master/llm-prompt-guide.md" target="_blank"></a></li>
+            </ul>
         </div>
     </div>
     <div class="dialog-footer" style="justify-content: space-between" bind="dialogFooter">
