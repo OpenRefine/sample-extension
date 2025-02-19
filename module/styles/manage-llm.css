@@ -91,3 +91,11 @@
   background-color: #f4f4f4;
   font-weight: bold;
 }
+
+.llm-about {
+  margin-top: 10px;
+}
+
+.llm-about ul {
+  margin: -5px 10px 10px;
+}

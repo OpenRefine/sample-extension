@@ -23,9 +23,9 @@ The AI Column Extraction feature allows users to create new columns by processin
 2. JSON Schema (Optional): Required when Response Format is set to JSON Schema. Defines the structure and validation rules for the output
 
 #### JSON Schema generator tools
-1. [Liquid Technologies]{https://www.liquid-technologies.com/online-json-to-schema-converter}
-2. [http://www.jsonschema.net]{http://www.jsonschema.net}
-3. [https://easy-json-schema.github.io]{https://easy-json-schema.github.io}
+1. [Liquid Technologies JSON to Schema converter](https://www.liquid-technologies.com/online-json-to-schema-converter)
+2. [jsonschema.net](http://www.jsonschema.net)
+3. [easy-json-schema.github.io](https://easy-json-schema.github.io)
 
 Note: There are few manual edits that may be required. Refer to the JSON schema in the example below.
 

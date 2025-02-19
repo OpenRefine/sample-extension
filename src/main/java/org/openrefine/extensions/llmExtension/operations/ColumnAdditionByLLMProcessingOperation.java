@@ -20,7 +20,7 @@ import com.google.refine.process.Process;
 import org.apache.commons.lang.Validate;
 import org.openrefine.extensions.llmExtension.LLMConfiguration;
 import org.openrefine.extensions.llmExtension.LLMUtils;
-import org.openrefine.extensions.llmExtension.serrvice.ChatCompletionService;
+import org.openrefine.extensions.llmExtension.service.ChatCompletionService;
 
 import java.io.Serializable;
 import java.net.HttpURLConnection;
