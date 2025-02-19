@@ -14,6 +14,9 @@ ManageLLMSettingsUI = function() {
   elmts.llmApiUrl.text($.i18n("llm-detail/serverUrl"));
   elmts.llmActions.text($.i18n("llm-detail/actions"));
 
+  elmts.infoLLMManagement.text($.i18n("llm-management/info"));
+  elmts.llmProviderGuide.text($.i18n("llm-nanagement/provider-guide"));
+  elmts.llmFeatureGuide.text($.i18n("llm-management/feature-guide"));
   elmts.explainLLMSetup.text($.i18n("llm-management/llm-help"));
   elmts.closeButton.text($.i18n("llm-management/close"));
   elmts.addButton.text($.i18n("llm-management/add-llm"));
