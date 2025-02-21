@@ -4,6 +4,10 @@ Documentation for managing LLM Provider which capatures the details of the AI se
 ## Overview
 This guide explains how to configure an LLM Provider by specifying key details such as the model, API key, temperature, top-p, seed, and max tokens.
 
+## Demo Video
+
+[AI-ManageLLM.mov](../../Downloads/AI-ManageLLM.mov)
+
 ## Configuration Fields
 
 | Field	| Description |
