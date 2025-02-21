@@ -4,6 +4,10 @@ Documentation for AI-powered text extraction and transformation functionality
 ## Overview
 The AI Column Extraction feature allows users to create new columns by processing existing text data using AI language models. Users can extract specific information, transform content, or generate new insights based on source text.
 
+## Demo Video
+
+[AI-FeatureDemo.mov](../../Downloads/AI-FeatureDemo.mov)
+
 ## Configuration
 
 ### Basic Settings
