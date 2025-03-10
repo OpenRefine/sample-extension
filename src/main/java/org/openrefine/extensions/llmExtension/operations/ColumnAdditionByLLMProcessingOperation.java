@@ -7,13 +7,13 @@ import com.google.refine.browsing.EngineConfig;
 import com.google.refine.browsing.FilteredRows;
 import com.google.refine.browsing.RowVisitor;
 import com.google.refine.expr.*;
+import com.google.refine.history.Change;
 import com.google.refine.history.HistoryEntry;
 import com.google.refine.model.Cell;
 import com.google.refine.model.Column;
 import com.google.refine.model.Project;
 import com.google.refine.model.Row;
-import com.google.refine.model.changes.CellAtRow;
-import com.google.refine.model.changes.ColumnAdditionChange;
+import com.google.refine.model.changes.*;
 import com.google.refine.operations.EngineDependentOperation;
 import com.google.refine.process.LongRunningProcess;
 import com.google.refine.process.Process;
@@ -23,15 +23,16 @@ import org.openrefine.extensions.llmExtension.LLMUtils;
 import org.openrefine.extensions.llmExtension.service.ChatCompletionService;
 
 import java.io.Serializable;
-import java.net.HttpURLConnection;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
 public class ColumnAdditionByLLMProcessingOperation extends EngineDependentOperation {
 
     final protected String _baseColumnName;
+    final protected String _columnAction;
     final protected String _newColumnName;
     final protected int _columnInsertIndex;
     final protected int _delay;
@@ -44,6 +45,7 @@ public class ColumnAdditionByLLMProcessingOperation extends EngineDependentOpera
     public ColumnAdditionByLLMProcessingOperation(
             @JsonProperty("engineConfig") EngineConfig engineConfig,
             @JsonProperty("baseColumnName") String baseColumnName,
+            @JsonProperty("columnAction") String columnAction,
             @JsonProperty("newColumnName") String newColumnName,
             @JsonProperty("columnInsertIndex") int columnInsertIndex,
             @JsonProperty("delay") int delay,
@@ -55,6 +57,7 @@ public class ColumnAdditionByLLMProcessingOperation extends EngineDependentOpera
          super(engineConfig);
 
         _baseColumnName = baseColumnName;
+        _columnAction = columnAction;
         _newColumnName = newColumnName;
         _columnInsertIndex = columnInsertIndex;
         _delay = delay;
@@ -66,12 +69,16 @@ public class ColumnAdditionByLLMProcessingOperation extends EngineDependentOpera
 
     public void validate() {
         Validate.notNull(_baseColumnName, "Missing base column name");
-        Validate.notNull(_newColumnName, "Missing new column name");
+        Validate.notNull(_columnAction, "Missing column action");
+        Validate.notNull(_newColumnName, "Missing column name");
         Validate.isTrue(_columnInsertIndex >= 0, "Invalid column insert index");
         Validate.notNull(_providerLabel, "Missing LLM provider label");
         Validate.notNull(_systemContent, "Missing System prompt");
         Validate.notNull(_responseFormat, "Missing Response format");
     }
+
+    @JsonProperty("columnMode")
+    public String getColumnMode() { return _columnAction; }
 
     @JsonProperty("newColumnName")
     public String getNewColumnName() {
@@ -110,12 +117,13 @@ public class ColumnAdditionByLLMProcessingOperation extends EngineDependentOpera
 
     @Override
     protected String getBriefDescription(Project project) {
-        return MessageFormat.format("Create column {0} at index {1} by AI process on column {2}", _newColumnName, _columnInsertIndex, _baseColumnName);
+        String description = _columnAction.equals("add") ? "Create column {0} at index {1} by AI process on column {2}" : "Update column {0} by AI process on column {2}";
+        return MessageFormat.format(description, _newColumnName, _columnInsertIndex, _baseColumnName);
     }
 
     protected String createDescription(Column column, List<CellAtRow> cellsAtRows) {
-        return MessageFormat.format("Create new column {0}, filling {1} rows by AI process based on column {2} using LLM {3}",
-        _newColumnName, cellsAtRows.size(), column.getName(), _providerLabel);
+        return MessageFormat.format("{0} column {1}, filling {2} rows by AI process based on column {3} using LLM {4}",
+        _columnAction.toUpperCase(), _newColumnName, cellsAtRows.size(), column.getName(), _providerLabel);
     }
 
     @Override
@@ -160,8 +168,13 @@ public class ColumnAdditionByLLMProcessingOperation extends EngineDependentOpera
                 _project.processManager.onFailedProcess(this, new Exception("No column named " + _baseColumnName));
                 return;
             }
-            if (_project.columnModel.getColumnByName(_newColumnName) != null) {
-                _project.processManager.onFailedProcess(this, new Exception("Another column already named " + _newColumnName));
+            if ( _columnAction.equals("add") && _project.columnModel.getColumnByName(_newColumnName) != null) {
+                _project.processManager.onFailedProcess(this, new Exception("Column name is not unique. Another column with same name exists " + _newColumnName));
+                return;
+            }
+
+            if ( _columnAction.equals("update") && _project.columnModel.getColumnByName(_newColumnName) == null) {
+                _project.processManager.onFailedProcess(this, new Exception("Column does not exist " + _newColumnName));
                 return;
             }
 
@@ -172,6 +185,7 @@ public class ColumnAdditionByLLMProcessingOperation extends EngineDependentOpera
 
             int count = dataRows.size();
             List<CellAtRow> responseBodies = new ArrayList<CellAtRow>(count);
+            Change columnDataChange = null;
             int i = 0;
             for (CellAtRow rowData : dataRows) {
                 String userData = rowData.cell.value.toString();
@@ -192,15 +206,32 @@ public class ColumnAdditionByLLMProcessingOperation extends EngineDependentOpera
             }
 
             if (!_canceled) {
+                if ( _columnAction.equals("update")) {
+                    Column resultsColumn = _project.columnModel.getColumnByName(_newColumnName);
+                    int resultsCellIndex = resultsColumn != null ? resultsColumn.getCellIndex() : -1;
+                    // column already exists, we overwrite cells where we made edits
+                    CellChange[] cellChanges = new CellChange[count];
+                    i = 0;
+                    for (CellAtRow dataCell : responseBodies) {
+                        int rowId = dataCell.row;
+                        Cell oldCell = _project.rows.get(rowId).getCell(resultsCellIndex);
+                        cellChanges[i] = new CellChange(rowId, resultsCellIndex,
+                                oldCell, dataCell.cell);
+                        i++;
+                    }
+                    columnDataChange = new MassCellChange(cellChanges, _newColumnName, false);
+                } else {
+                    columnDataChange = new ColumnAdditionChange(_newColumnName, _columnInsertIndex, responseBodies);
+                }
+
+                Change fullChange = new MassChange(Arrays.asList(columnDataChange), false);
+
                 HistoryEntry historyEntry = new HistoryEntry(
                         _historyEntryID,
                         _project,
                         _description,
                         ColumnAdditionByLLMProcessingOperation.this,
-                        new ColumnAdditionChange(
-                                _newColumnName,
-                                _columnInsertIndex,
-                                responseBodies));
+                        fullChange);
 
                 _project.history.addEntry(historyEntry);
                 _project.processManager.onDoneProcess(this);

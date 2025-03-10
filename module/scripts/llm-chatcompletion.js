@@ -29,6 +29,10 @@ LLMChatCompletionDialog.prototype.launch = function (column) {
   elmts.previewData.text($.i18n("llm-chatcompletion/preview-label"));
   elmts.previewResponseTextareaId.text($.i18n("llm-chatcompletion/response-help-text"));
 
+  const colActionSelector = elmts.columnaction;
+  colActionSelector.append('<option value="' + "add" + '">' + $.i18n("llm-chatcompletion/col-mode-add") + '</option>');
+  colActionSelector.append('<option value="' + "update" + '">' + $.i18n("llm-chatcompletion/col-mode-upd") + '</option>');
+
   const llmSelector = elmts.llmselector;
   LLMManager.loadAllLLMProviders().then(llmProviders => {
     llmSelector.empty();
@@ -41,9 +45,9 @@ LLMChatCompletionDialog.prototype.launch = function (column) {
 
   const responseformatSelector = elmts.responseformatselector;
   responseformatSelector.append('<option value="" disabled selected>' + selectOneLabel + '</option>');
-  responseformatSelector.append('<option value="' + "text" + '">' + "Text" + '</option>');
-  responseformatSelector.append('<option value="' + "json_schema" + '">' + "JSON according to provided schema" + '</option>');
-  responseformatSelector.append('<option value="' + "json_object" + '">' + "JSON object" + '</option>');
+  responseformatSelector.append('<option value="' + "text" + '">' +  $.i18n("llm-chatcompletion/response-format-text") + '</option>');
+  responseformatSelector.append('<option value="' + "json_schema" + '">' +  $.i18n("llm-chatcompletion/response-format-json-schema") + '</option>');
+  responseformatSelector.append('<option value="' + "json_object" + '">' +  $.i18n("llm-chatcompletion/response-format-json-object") + '</option>');
 
   var o = DataTableView.sampleVisibleRows(column);
   elmts.previewRequestTextareaId.text(o.values[0]);
@@ -68,6 +72,8 @@ LLMChatCompletionDialog.prototype.launch = function (column) {
   elmts.cancelButton.on('click', dismiss);
 
   elmts.okButton.on('click', function (event)  {
+        const colActionSelector = elmts.columnaction;
+        var columnAction = colActionSelector.val();
         const llmSelector = elmts.llmselector;
         var selectedLLM = llmSelector.val();
         const responseformatSelector = elmts.responseformatselector;
@@ -99,6 +105,7 @@ LLMChatCompletionDialog.prototype.launch = function (column) {
           {},
           {
             baseColumnName: column.name,
+            columnAction: columnAction,
             newColumnName: columnName,
             columnInsertIndex: columnIndex + 1,
             delay: delay,
