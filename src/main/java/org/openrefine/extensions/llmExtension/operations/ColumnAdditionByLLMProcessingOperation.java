@@ -77,8 +77,8 @@ public class ColumnAdditionByLLMProcessingOperation extends EngineDependentOpera
         Validate.notNull(_responseFormat, "Missing Response format");
     }
 
-    @JsonProperty("columnMode")
-    public String getColumnMode() { return _columnAction; }
+    @JsonProperty("columnAction")
+    public String get_columnAction() { return _columnAction; }
 
     @JsonProperty("newColumnName")
     public String getNewColumnName() {
