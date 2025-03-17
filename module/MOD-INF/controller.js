@@ -13,6 +13,7 @@ function registerCommands() {
   var RS = Packages.com.google.refine.RefineServlet;
   RS.registerCommand(module, "llm-management", Packages.org.openrefine.extensions.llmExtension.cmd.LLMProviderCommand());
   RS.registerCommand(module, "llm-connect", Packages.org.openrefine.extensions.llmExtension.cmd.LLMConnectCommand());
+  RS.registerCommand(module, "llm-prompt", Packages.org.openrefine.extensions.llmExtension.cmd.LLMPromptCommand());
   RS.registerCommand(module, "add-column-by-llm-processing", Packages.org.openrefine.extensions.llmExtension.cmd.AddColumnByLLMProcessingCommand());
 }
 

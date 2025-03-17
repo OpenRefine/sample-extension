@@ -46,9 +46,17 @@
   "llm-chatcompletion/preview-request": "value",
   "llm-chatcompletion/response-help-text": "AI-generated response will appear here",
   "llm-chatcompletion/preview-label": "Preview",
+  "llm-chatcompletion/history-label": "History",
   "llm-chatcompletion/prompt-help": "Help",
   "llm-extension/processing": "Processing LLM request ...",
   "llm-chatcompletion/select-one": "Select one",
   "llm-chatcompletion/preview-missing-info": "Preview requires LLM Provider, Response format & Task detail to be set.",
-  "llm-chatconpletion/preview-missing-schema": "JSON schema is required"
+  "llm-chatconpletion/preview-missing-schema": "JSON schema is required",
+  "llm-chatcompletion/history-action": "Action",
+  "llm-chatcompletion/history-source": "Source",
+  "llm-chatcompletion/history-reuse": "Reuse",
+  "llm-chatcompletion/history-json-schema": "JSON Schema",
+  "llm-chatcompletion/history-prompt": "Prompt",
+  "llm-chatcompletion/this-project": "This Project",
+  "llm-chatcompletion/other-project": "Other Project"
 }

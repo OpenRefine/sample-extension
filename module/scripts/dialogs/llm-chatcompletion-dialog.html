@@ -43,22 +43,17 @@
                 </table>
             </div>
             <hr>
-            <label class="preview-label-bold" bind="previewData"></label>
-            <div class="preview-panel">
-                <div class="preview-container">
-                    <div class="preview-item">
-                        <label bind="previewRequestLabel" class="preview-label">Input Data</label>
-                        <textarea bind="previewRequestTextareaId" class="preview-textarea" spellcheck="false" disabled></textarea>
-                    </div>
-                    <div class="preview-item">
-                        <label bind="previewResponseLabel" class="preview-label">Output Data</label>
-                        <textarea bind="previewResponseTextareaId" class="preview-textarea" spellcheck="false" disabled></textarea>
-                    </div>
+            <div id="llm-preview-tabs" style="border: none;">
+                <ul>
+                    <li><a href="#llm-preview-tab" bind="or_dialog_preview"></a></li>
+                    <li><a href="#llm-history-tab" bind="or_dialog_history"></a></li>
+                </ul>
+                <div id="llm-preview-tab">
+                    <div class="llm-preview-container" bind="llmPreviewContainer"></div>
                 </div>
-            </div>
-            <div class="preview-footer">
-                <a class="button" bind="llmPromptHelp" href="https://github.com/sunilnatraj/llm-extension/blob/master/llm-prompt-guide.md" target="_blank"></a>
-                <button class="button button-primary" type="preview" bind="previewButton"></button>
+                <div class="history-container" id="llm-history-tab">
+                    <div class="history-table-container" bind="llmHistoryContainer"></div>
+                </div>
             </div>
         </div>
         <div class="dialog-footer" bind="dialogFooter">
