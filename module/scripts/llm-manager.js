@@ -63,3 +63,19 @@ LLMManager.ProcessLLMRequest = async function(llmProviderInfo) {
         );
     });
 };
+
+LLMManager.getPromptHistory = async function () {
+    var promptHistory = [];
+    let response = await $.get(
+        "command/llm-extension/llm-prompt?"+ $.param({ project: theProject.id }),
+        null,
+        function(settings) {
+            if(settings){
+                promptHistory = settings;
+            }
+        },
+        "json"
+        );
+        let data = await response;
+        return promptHistory;
+};

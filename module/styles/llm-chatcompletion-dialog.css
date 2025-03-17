@@ -10,6 +10,31 @@ div.input-container-llm>input, div.input-container-llm>textarea {
   vertical-align: top;
 }
 
+#llm-preview-tabs ul {
+    display: flex;         /* Make tabs align horizontally */
+    list-style: none;      /* Remove default bullets */
+    padding: 0;            /* Remove extra padding */
+    margin: 0;             /* Remove default margin */
+}
+
+#llm-preview-tabs ul li {
+    margin-right: 10px;    /* Add spacing between tabs */
+}
+
+#llm-preview-tabs ul li a {
+    display: inline-block; /* Ensure full clickable area */
+    padding: 0.5em 1em;    /* Add padding for better appearance */
+    text-decoration: none; /* Remove underline */
+    background: #ddd;      /* Light background */
+    border-radius: 5px 5px 0 0;
+}
+
+#llm-preview-tabs ul li a:hover,
+#llm-preview-tabs ul li a.active {
+    background: #bbb;      /* Highlight active tab */
+    font-weight: bold;
+}
+
 .hint-label {
     margin-top: 3px;
     display: flex;
@@ -18,14 +43,26 @@ div.input-container-llm>input, div.input-container-llm>textarea {
     font-style: italic;
 }
 
-.preview-panel {
+.llm-tab-content {
     display: flex;
-    justify-content: center;
-    margin: 10px;
+    flex-direction: column;
+    align-items: center;
+    width: 700px;
+    max-width: 100%;
+    margin: 5px auto; /* Center content */
 }
 
-.preview-container {
+
+/* Ensure Preview and History Containers are Aligned */
+.preview-container{
     display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 700px;
+    max-width: 100%;
+}
+
+.history-container {
     grid-template-columns: 1fr 1fr;
     gap: 10px;
     width: 700px;
@@ -70,3 +107,68 @@ div.input-container-llm>input, div.input-container-llm>textarea {
     justify-content: right;
     padding: var(--padding-tight);
   }
+
+.history-table-container {
+    max-height: 250px; /* Adjust height as needed */
+    max-width: flex;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+}
+
+
+/* Table Styling for History */
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Table Header */
+.history-table thead {
+    background: #f4f4f4;
+}
+
+.history-table th {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 2;
+    text-align: left;
+    padding: 8px;
+    border-bottom: 2px solid #ddd;
+}
+
+/* Table Rows */
+.history-table td {
+    display: table-cell;
+    vertical-align: top;
+    white-space: normal;
+    margin: 0;
+    padding: 8px;
+}
+
+.history-table tr:not(:last-child) td {
+    border-bottom: 1px solid #ddd; /* Add only between rows */
+}
+
+/* Alternating Row Colors */
+.history-table tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+/* Text Truncation (2-line limit) */
+.text-truncate {
+    display: -webkit-box;
+    line-clamp: calc();
+    -webkit-line-clamp: 2; /* Limit to 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    max-width: 200px;
+}
+
+/* Ensure all tab content has consistent spacing */
+#llm-preview-tab,
+#llm-history-tab {
+    padding: 10px;
+}

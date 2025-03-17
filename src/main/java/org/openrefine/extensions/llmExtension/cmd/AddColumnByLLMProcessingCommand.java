@@ -15,6 +15,7 @@ public class AddColumnByLLMProcessingCommand extends EngineDependentCommand {
                                                 HttpServletRequest request, EngineConfig engineConfig) throws Exception {
 
         String baseColumnName = request.getParameter("baseColumnName");
+        String columnAction = request.getParameter("columnAction");
         String newColumnName = request.getParameter("newColumnName");
         int columnInsertIndex = Integer.parseInt(request.getParameter("columnInsertIndex"));
         int delay = Integer.parseInt(request.getParameter("delay"));
@@ -26,6 +27,7 @@ public class AddColumnByLLMProcessingCommand extends EngineDependentCommand {
         return new ColumnAdditionByLLMProcessingOperation(
                 engineConfig,
                 baseColumnName,
+                columnAction,
                 newColumnName,
                 columnInsertIndex,
                 delay,
