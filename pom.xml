@@ -120,7 +120,7 @@
     </dependency>
     <dependency>
       <groupId>org.openrefine</groupId>
-      <artifactId>main</artifactId>
+      <artifactId>core</artifactId>
       <version>${openrefine.version}</version>
       <type>test-jar</type>
       <scope>test</scope>
