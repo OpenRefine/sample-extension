@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <properties>
-    <openrefine.version>3.8.7</openrefine.version>
+    <openrefine.version>3.9.1</openrefine.version>
     <!-- Change the values below, as well as the groupId & url, to reflect your extension -->
     <extension.id>openrefine-sample-extension</extension.id>
     <extension.name>OpenRefine Sample Extension</extension.name>
@@ -119,8 +119,14 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>5.15.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>org.openrefine</groupId>
-      <artifactId>main</artifactId>
+      <artifactId>core</artifactId>
       <version>${openrefine.version}</version>
       <type>test-jar</type>
       <scope>test</scope>
