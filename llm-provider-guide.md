@@ -4,7 +4,7 @@ Documentation for managing LLM Provider which capatures the details of the AI se
 ## Overview
 This guide explains how to configure an LLM Provider by specifying key details such as the model, API key, temperature, top-p, seed, and max tokens.
 
-If you want to use an LLM that does not support the /chat/completions endpoint, refer the [section](#LLMs-that-don't-support-the-/chat/completions-endpoint)
+If you want to use an LLM that does not support the /chat/completions endpoint, refer the [section](#llms-that-dont-support-the-chatcompletions-endpoint)
 
 ## Demo Video
 
