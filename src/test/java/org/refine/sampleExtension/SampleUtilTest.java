@@ -1,4 +1,4 @@
-package com.google.refine.sampleExtension;
+package org.refine.sampleExtension;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertThrows;
