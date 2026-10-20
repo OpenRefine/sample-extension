@@ -5,12 +5,13 @@
   <properties>
     <openrefine.version>3.10.1</openrefine.version>
     <!-- Change the values below, as well as the groupId & url, to reflect your extension -->
-    <extension.id>openrefine-sample-extension</extension.id>
     <extension.name>OpenRefine Sample Extension</extension.name>
+    <argLine/>
   </properties>
 
+  <!-- Change the groupId, artifactId, and url to reflect your extension -->
   <groupId>org.openrefine</groupId>
-  <artifactId>${extension.id}</artifactId>
+  <artifactId>openrefine-sample-extension</artifactId>
   <packaging>jar</packaging>
   <version>0.1.0</version>
 
@@ -59,6 +60,7 @@
             <phase>compile</phase>
             <goals>
                 <goal>copy-dependencies</goal>
+                <goal>properties</goal>
             </goals>
             <configuration>
                 <outputDirectory>module/MOD-INF/lib</outputDirectory>
@@ -92,6 +94,9 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.6.0</version>
+        <configuration>
+          <argLine>@{argLine} -javaagent:${org.mockito:mockito-core:jar}</argLine>
+        </configuration>
       </plugin>
     </plugins>
   </build>
@@ -122,6 +127,12 @@
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
       <version>5.24.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>2.0.20</version>
       <scope>test</scope>
     </dependency>
     <dependency>
