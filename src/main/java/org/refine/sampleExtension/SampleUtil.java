@@ -1,4 +1,4 @@
-package com.google.refine.sampleExtension;
+package org.refine.sampleExtension;
 
 
 public class SampleUtil {
